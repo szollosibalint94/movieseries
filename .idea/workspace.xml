@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a0a56713-f476-4174-ad13-d76bf88ef4bc" name="Default Changelist" comment="" />
+    <list default="true" id="a0a56713-f476-4174-ad13-d76bf88ef4bc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/domain/Movie.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/domain/Series.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/domain/Sex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/service/ReviewService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/view/ConsoleView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/view/IO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/epam/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/domain/Actor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/epam/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/epam/Media.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/domain/Media.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/epam/Movie.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/epam/Rating.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/domain/Rating.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/epam/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/domain/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/epam/ReviewService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/epam/Series.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/epam/Sex.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/epam/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/epam/training/moviereview/domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/epam/View.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,25 +31,49 @@
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="OE" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1WAEOdbyJDW1BKfxNc8GdFSr8FA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="RunManager">
+  <component name="PropertiesComponent">
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RunManager" selected="Application.App">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.epam.training.moviereview.App" />
+      <module name="OE" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.epam.training.moviereview.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.epam.App" />
       <module name="OE" />
@@ -39,6 +84,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -66,9 +117,41 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1578583974658">
+    <state x="765" y="205" key="#com.intellij.ide.util.MemberChooser" timestamp="1578659881621">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1578583974658" />
+    <state x="765" y="205" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1578659881621" />
+    <state x="707" y="377" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1578656796948">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="707" y="377" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1578656796948" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1578662937315">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1578662937315" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1578662937315">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1578662937315" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1578662937315">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1578662937315" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1578662937315">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1578662937315" />
+    <state x="461" y="163" key="SettingsEditor" timestamp="1578659272764">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1578659272764" />
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1578659549601">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1578659549601" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1578660008274">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1578660008274" />
   </component>
 </project>
