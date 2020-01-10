@@ -1,24 +1,22 @@
 package com.epam.training.moviereview;
 
-import com.epam.training.moviereview.domain.User;
-import com.epam.training.moviereview.service.ReviewService;
+import com.epam.training.moviereview.service.ConsoleReviewService;
 
 import com.epam.training.moviereview.view.ConsoleView;
 import com.epam.training.moviereview.view.View;
 
 public class App {
-    User user;
 
-    public App(ReviewService service, View view) {
+    public App(ConsoleReviewService service, View view) {
         this.service = service;
         this.view=view;
     }
 
-    ReviewService service;
+    ConsoleReviewService service;
     View view;
 
     public static void main(String[] args) {
-        App app=new App(new ReviewService(), new ConsoleView());
+        App app=new App(new ConsoleReviewService(), new ConsoleView());
         app.play();
     }
 
@@ -33,7 +31,7 @@ public class App {
     }
 
     private void doReview(){
-
+        view.printWelcomeMessage(service.findUser());
     }
 
     private void printReview(){}

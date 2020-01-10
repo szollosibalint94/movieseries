@@ -3,8 +3,19 @@ package com.epam.training.moviereview.domain;
 public class Review {
     String text;
     User creator;
-    Media reviewOf;
+    Media media;
     Rating rating;
+
+    private Review(Builder builder) {
+        this.text = builder.text;
+        this.creator = builder.creator;
+        this.media = builder.media;
+        this.rating = builder.rating;
+    }
+
+    public static Builder newReview() {
+        return new Builder();
+    }
 
     public String getText() {
         return text;
@@ -22,12 +33,12 @@ public class Review {
         this.creator = creator;
     }
 
-    public Media getReviewOf() {
-        return reviewOf;
+    public Media getMedia() {
+        return media;
     }
 
-    public void setReviewOf(Media reviewOf) {
-        this.reviewOf = reviewOf;
+    public void setMedia(Media media) {
+        this.media = media;
     }
 
     public Rating getRating() {
@@ -36,5 +47,39 @@ public class Review {
 
     public void setRating(Rating rating) {
         this.rating = rating;
+    }
+
+    public static final class Builder {
+        private String text;
+        private User creator;
+        private Media media;
+        private Rating rating;
+
+        private Builder() {
+        }
+
+        public Review build() {
+            return new Review(this);
+        }
+
+        public Builder text(String text) {
+            this.text = text;
+            return this;
+        }
+
+        public Builder creator(User creator) {
+            this.creator = creator;
+            return this;
+        }
+
+        public Builder media(Media media) {
+            this.media = media;
+            return this;
+        }
+
+        public Builder rating(Rating rating) {
+            this.rating = rating;
+            return this;
+        }
     }
 }

@@ -8,7 +8,19 @@ public class Actor {
     LocalDate born;
     Sex sex;
     String biography;
-    List<Movie> filmography;
+    List<Media> filmography;
+
+    private Actor(Builder builder) {
+        this.name = builder.name;
+        this.born = builder.born;
+        this.sex = builder.sex;
+        this.biography = builder.biography;
+        this.filmography = builder.filmography;
+    }
+
+    public static Builder newActor() {
+        return new Builder();
+    }
 
     public String getName() {
         return name;
@@ -42,11 +54,55 @@ public class Actor {
         this.biography = biography;
     }
 
-    public List<Movie> getFilmography() {
+    public List<Media> getFilmography() {
         return filmography;
     }
 
-    public void setFilmography(List<Movie> filmography) {
+    public void setFilmography(List<Media> filmography) {
         this.filmography = filmography;
+    }
+
+    public void addMovieToFilmography(Media media){
+        this.filmography.add(media);
+    }
+
+    public static final class Builder {
+        private String name;
+        private LocalDate born;
+        private Sex sex;
+        private String biography;
+        private List<Media> filmography;
+
+        private Builder() {
+        }
+
+        public Actor build() {
+            return new Actor(this);
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder born(LocalDate born) {
+            this.born = born;
+            return this;
+        }
+
+        public Builder sex(Sex sex) {
+            this.sex = sex;
+            return this;
+        }
+
+        public Builder biography(String biography) {
+            this.biography = biography;
+            return this;
+        }
+
+        public Builder filmography(List<Media> filmography) {
+            this.filmography = filmography;
+            return this;
+        }
     }
 }

@@ -7,5 +7,7 @@ public interface View {
 
     void printWelcomeMessage(User user);
 
+    void printMedias();
+
     void printReviews(User user);
 }
