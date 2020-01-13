@@ -3,12 +3,13 @@ package com.epam.training.moviereview.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.epam.training.moviereview.App;
 import com.epam.training.moviereview.domain.Media;
 import com.epam.training.moviereview.domain.Review;
 import com.epam.training.moviereview.domain.User;
+import com.epam.training.moviereview.view.IO;
 
 public class ConsoleReviewService implements Service {
+    IO io=new IO();
     User user;
     Review review;
 
@@ -24,8 +25,14 @@ public class ConsoleReviewService implements Service {
         BuildMedias buildMedias=new BuildMedias();
 
         List<Media> mediaList=buildMedias.getMedias();
-
+        printMedias(mediaList);
         return mediaList;
+    }
+
+    public void printMedias(List<Media> medias){
+        for (Media media: medias) {
+            io.consoleOut(media.toString());
+        }
     }
 
     @Override public void saveReview(Review review){

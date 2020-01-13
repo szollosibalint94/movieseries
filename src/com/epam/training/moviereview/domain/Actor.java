@@ -1,6 +1,7 @@
 package com.epam.training.moviereview.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Actor {
@@ -66,12 +67,21 @@ public class Actor {
         this.filmography.add(media);
     }
 
+    @Override public String toString() {
+        return "Actor{" +
+            "name='" + name + '\'' +
+            ", born=" + born +
+            ", sex=" + sex +
+            ", biography='" + biography + '\'' +
+            '}';
+    }
+
     public static final class Builder {
         private String name;
         private LocalDate born;
         private Sex sex;
         private String biography;
-        private List<Media> filmography;
+        private List<Media> filmography=new ArrayList<>();
 
         private Builder() {
         }

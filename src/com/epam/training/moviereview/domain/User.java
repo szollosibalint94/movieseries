@@ -54,6 +54,14 @@ public class User {
         this.reviews = reviews;
     }
 
+    @Override public String toString() {
+        return "User{" +
+            "name='" + name + '\'' +
+            ", email='" + email + '\'' +
+            ", passWord='" + passWord + '\'' +
+            '}';
+    }
+
     public static final class Builder {
         private String name;
         private String email;

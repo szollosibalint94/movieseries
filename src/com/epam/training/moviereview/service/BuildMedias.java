@@ -1,5 +1,6 @@
 package com.epam.training.moviereview.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class BuildMedias {
         .build();
 
     Media chernobyl=Series.newMedia()
+        .id(BigDecimal.valueOf(1))
         .title("Chernobyl")
         .description("In April 1986, an explosion at the Chernobyl nuclear power plant in the Union of Soviet Socialist Republics becomes one of the world's worst man-made catastrophes.")
         .premier(LocalDate.of(2019,5,7))
@@ -64,6 +66,7 @@ public class BuildMedias {
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     Media starWars= Movie.newMedia()
+        .id(BigDecimal.valueOf(1))
         .title("Star Wars: Episode IX - The Rise of Skywalker")
         .description("The surviving members of the resistance face the First Order once again, and the legendary conflict between the Jedi and the Sith reaches its peak bringing the Skywalker saga to its end.")
         .premier(LocalDate.of(2019,12,19))
@@ -115,6 +118,7 @@ public class BuildMedias {
         chernobyl.addReview(chernobyl1);
         chernobyl.addReview(chernobyl2);
 
+        //Finish Star Wars movie
         rey.addMovieToFilmography(starWars);
         ren.addMovieToFilmography(starWars);
         luke.addMovieToFilmography(starWars);
@@ -123,6 +127,9 @@ public class BuildMedias {
         starWars.addCast(luke);
         starWars.addReview(starWars1);
         starWars.addReview(starWars2);
+
+        medias.add(chernobyl);
+        medias.add(starWars);
     }
 
     public List<Media> getMedias() {

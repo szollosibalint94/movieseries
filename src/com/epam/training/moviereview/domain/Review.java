@@ -6,6 +6,8 @@ public class Review {
     Media media;
     Rating rating;
 
+    public Review(){}
+
     private Review(Builder builder) {
         this.text = builder.text;
         this.creator = builder.creator;
@@ -47,6 +49,14 @@ public class Review {
 
     public void setRating(Rating rating) {
         this.rating = rating;
+    }
+
+    @Override public String toString() {
+        return "Review{" +
+            "text='" + text + '\'' +
+            ", creator=" + creator +
+            ", rating=" + rating +
+            '}';
     }
 
     public static final class Builder {

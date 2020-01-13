@@ -1,9 +1,12 @@
 package com.epam.training.moviereview.domain;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Media {
+    BigDecimal id;
     String title;
     String description;
     LocalDate premier;
@@ -13,6 +16,7 @@ public class Media {
     public Media() {}
 
     private Media(Builder builder) {
+        this.id=builder.id;
         this.title = builder.title;
         this.description = builder.description;
         this.premier = builder.premier;
@@ -22,6 +26,14 @@ public class Media {
 
     public static Builder newMedia() {
         return new Builder();
+    }
+
+    public BigDecimal getId() {
+        return id;
+    }
+
+    public void setId(BigDecimal id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -68,18 +80,35 @@ public class Media {
 
     public void addReview(Review review){this.reviews.add(review);}
 
+    @Override public String toString() {
+        return id + ": " +
+            "Media{" +
+            "Title='" + title + '\'' +
+            ", Description='" + description + '\'' +
+            ", Premier=" + premier +
+            ", Cast=" + cast +
+            ", Reviews=" + reviews +
+            '}';
+    }
+
     public static final class Builder {
+        private BigDecimal id;
         private String title;
         private String description;
         private LocalDate premier;
-        private List<Review> reviews;
-        private List<Actor> cast;
+        private List<Review> reviews=new ArrayList<>();
+        private List<Actor> cast=new ArrayList<>();
 
         private Builder() {
         }
 
         public Media build() {
             return new Media(this);
+        }
+
+        public Builder id(BigDecimal id){
+            this.id=id;
+            return this;
         }
 
         public Builder title(String title) {

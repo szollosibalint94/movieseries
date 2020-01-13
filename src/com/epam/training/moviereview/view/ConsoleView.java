@@ -13,7 +13,7 @@ public class ConsoleView implements View {
     }
 
     @Override public void printWelcomeMessage(User user) {
-        io.consoleOut("Welcome " + user.getName() + " to the movie and series review application. In the first step, you have to setup your user!");
+        io.consoleOut("Welcome " + user.getName() + " to the movie and series review application. ");
     }
 
     @Override public void printMedias() {
