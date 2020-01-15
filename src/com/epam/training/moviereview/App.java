@@ -22,8 +22,10 @@ public class App {
     }
 
     List<Media> medias;
+    Media selectedMedia;
     Service service;
     View view;
+    IO io=new IO();
 
     public static void main(String[] args) {
         App app=new App(new ConsoleReviewService(), new ConsoleView());
@@ -33,7 +35,7 @@ public class App {
     public void play(){
         createUser();
         doReview();
-        printReview();
+        printReviewAverage();
     }
 
     private void createUser(){
@@ -41,9 +43,7 @@ public class App {
     }
 
     private void doReview(){
-        IO io=new IO();
         Review review=new Review();
-        Media selectedMedia;
         medias=service.findAllMedia();
         view.printWelcomeMessage(service.findUser());
 
@@ -74,11 +74,16 @@ public class App {
 
         review.setCreator(service.findUser());
 
-        service.saveReview(review);
+        service.saveReview(selectedMedia, review);
         this.review=review;
     }
 
-    private void printReview(){
-        System.out.println(this.review);
+    private void printReviewAverage(){
+        List<Review> reviews=service.findAllReview(selectedMedia);
+        int sum=0;
+        for(Review review : reviews){
+            sum+=Rating.valueOfRating(review.getRating());
+        }
+        io.consoleOut("Average of reviews: "+sum/selectedMedia.getReviews().size());
     }
 }

@@ -11,7 +11,6 @@ import com.epam.training.moviereview.view.IO;
 public class ConsoleReviewService implements Service {
     IO io=new IO();
     User user;
-    Review review;
 
     @Override public void saveUser(User user){
         this.user=user;
@@ -35,15 +34,12 @@ public class ConsoleReviewService implements Service {
         }
     }
 
-    @Override public void saveReview(Review review){
-        this.review=review;
+    @Override public void saveReview(Media media, Review review){
+        media.addReview(review);
+        review.setMedia(media);
     }
 
-    @Override public List<Review> findAllReview(){
-        List<Review> reviewList=new ArrayList<>();
-
-        reviewList.add(this.review);
-
-        return reviewList;
+    @Override public List<Review> findAllReview(Media media){
+        return media.getReviews();
     }
 }

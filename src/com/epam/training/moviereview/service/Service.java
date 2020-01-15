@@ -1,6 +1,5 @@
 package com.epam.training.moviereview.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.epam.training.moviereview.domain.Media;
@@ -14,7 +13,7 @@ public interface Service {
 
     public List<Media> findAllMedia();
 
-    public void saveReview(Review review);
+    public void saveReview(Media media, Review review);
 
-    public List<Review> findAllReview();
+    public List<Review> findAllReview(Media media);
 }
