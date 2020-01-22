@@ -1,9 +1,12 @@
+package app;
+
 import java.math.BigDecimal;
 import java.util.List;
 
 import domain.Media;
 import domain.Rating;
 import domain.Review;
+import org.springframework.beans.factory.annotation.Autowired;
 import service.ConsoleReviewService;
 
 import service.Service;
@@ -12,27 +15,32 @@ import view.IO;
 import view.View;
 
 public class App {
-    Review review=new Review();
+    @Autowired
+    Review review;
+    @Autowired
+    IO io=new IO();
+
+    Service service;
+    View view;
+
+    List<Media> medias;
+    Media selectedMedia;
 
     public App(Service service, View view) {
         this.service = service;
         this.view=view;
     }
 
-    List<Media> medias;
-    Media selectedMedia;
-    Service service;
-    View view;
-    IO io=new IO();
-
-    public static void main(String[] args) {
-        App app=new App(new ConsoleReviewService(), new ConsoleView());
-        app.play();
-    }
-
     public void play(){
         createUser();
-        doReview();
+
+        view.printWelcomeMessage(service.findUser());
+        String anotherReview;
+        do {
+            doReview();
+            anotherReview=io.consoleIn("Do you want to write another review? (yes/no)").toUpperCase();
+        }while(anotherReview.contentEquals("YES"));
+
         printReviewAverage();
     }
 
@@ -42,8 +50,9 @@ public class App {
 
     private void doReview(){
         Review review=new Review();
-        medias=service.findAllMedia();
-        view.printWelcomeMessage(service.findUser());
+        if(medias==null) {
+            medias = service.findAllMedia();
+        }
 
         do {
             BigDecimal id = BigDecimal.valueOf(Long.parseLong(io.consoleIn("Choose an id")));
