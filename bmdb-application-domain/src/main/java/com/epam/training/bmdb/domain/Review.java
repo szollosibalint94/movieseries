@@ -1,9 +1,7 @@
 package com.epam.training.bmdb.domain;
 
-import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

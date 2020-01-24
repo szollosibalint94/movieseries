@@ -2,16 +2,15 @@ package com.epam.training.bmdb.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.epam.training.bmdb.domain.Media;
 import com.epam.training.bmdb.domain.Rating;
 import com.epam.training.bmdb.domain.Review;
-import com.epam.training.bmdb.domain.User;
-import com.epam.training.bmdb.service.ConsoleReviewService;
 import com.epam.training.bmdb.view.ConsoleView;
 import com.epam.training.bmdb.view.IO;
+import com.epam.training.bmdb.domain.User;
+import com.epam.training.bmdb.service.ConsoleReviewService;
 
 public class App {
     @Autowired

@@ -10,11 +10,11 @@ import java.util.List;
 
 import com.epam.training.bmdb.domain.Media;
 import com.epam.training.bmdb.domain.Review;
-import com.epam.training.bmdb.domain.User;
 import com.epam.training.bmdb.repository.MediaRepository;
 import com.epam.training.bmdb.repository.ReviewRepository;
 import com.epam.training.bmdb.repository.UserRepository;
 import com.epam.training.bmdb.view.IO;
+import com.epam.training.bmdb.domain.User;
 
 @Component
 public class ConsoleReviewService implements Service {
