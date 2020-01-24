@@ -1,96 +1,109 @@
-package app;
+package com.epam.training.bmdb.app;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import domain.Media;
-import domain.Rating;
-import domain.Review;
-import org.springframework.beans.factory.annotation.Autowired;
-import service.ConsoleReviewService;
-
-import service.Service;
-import view.ConsoleView;
-import view.IO;
-import view.View;
+import com.epam.training.bmdb.domain.Media;
+import com.epam.training.bmdb.domain.Rating;
+import com.epam.training.bmdb.domain.Review;
+import com.epam.training.bmdb.domain.User;
+import com.epam.training.bmdb.service.ConsoleReviewService;
+import com.epam.training.bmdb.view.ConsoleView;
+import com.epam.training.bmdb.view.IO;
 
 public class App {
     @Autowired
-    Review review;
+    private Review review;
     @Autowired
-    IO io=new IO();
+    private IO io;
 
-    Service service;
-    View view;
+    @Autowired
+    private ConsoleReviewService service;
+    @Autowired
+    private ConsoleView view;
+    @Autowired
+    User activeUser;
+
+    @Autowired
+    private I18N i18N;
 
     List<Media> medias;
     Media selectedMedia;
 
-    public App(Service service, View view) {
-        this.service = service;
-        this.view=view;
-    }
+    public void play() {
+        medias = service.findAllMedia();
+        activeUser = view.readUserData();
+        if (activeUser.getName() == null) {
+            createUser();
+        }
 
-    public void play(){
-        createUser();
-
-        view.printWelcomeMessage(service.findUser());
+        view.printWelcomeMessage(activeUser);
         String anotherReview;
         do {
             doReview();
-            anotherReview=io.consoleIn("Do you want to write another review? (yes/no)").toUpperCase();
-        }while(anotherReview.contentEquals("YES"));
-
-        printReviewAverage();
+            printReviewAverage();
+            anotherReview = io.consoleIn(i18N.otherReviewMessage).toUpperCase();
+        } while (anotherReview.contentEquals(i18N.otherReviewYes));
     }
 
-    private void createUser(){
-        service.saveUser(view.readUserData());
+    private void createUser() {
+        io.consoleOut(i18N.registerMessage);
+        User newUser = new User();
+        newUser.setName(io.consoleIn(i18N.yourNameMessage));
+        newUser.setEmail(io.consoleIn(i18N.emailMessage));
+        newUser.setPassWord(io.consoleIn(i18N.passWordMessage));
+
+        service.saveUser(newUser);
+        activeUser = view.readUserData(newUser.getEmail());
     }
 
-    private void doReview(){
-        Review review=new Review();
-        if(medias==null) {
+    private void doReview() {
+        if (medias == null) {
             medias = service.findAllMedia();
         }
 
+        service.printMedias(medias);
+
         do {
-            BigDecimal id = BigDecimal.valueOf(Long.parseLong(io.consoleIn("Choose an id")));
+            long id = Long.parseLong(io.consoleIn(i18N.chooseId));
 
             int i = 0;
             while (i < medias.size() && !medias.get(i).getId().equals(id)) {
                 i++;
             }
-            selectedMedia=medias.get(i);
-        }while (selectedMedia==null);
+            if (i < medias.size()) {
+                selectedMedia = medias.get(i);
+            }
+        } while (selectedMedia == null);
 
-        review.setText(io.consoleIn("Write a review"));
+        review.setText(io.consoleIn(i18N.writeReview));
 
         do {
-            String rating=io.consoleIn("Choose a rating! (BAD, AVERAGE, GOOD)").toUpperCase();
-            if(rating.contentEquals("BAD")){
+            String rating = io.consoleIn(i18N.chooseRatingMessage).toUpperCase();
+            if (rating.contentEquals(i18N.badRating)) {
                 review.setRating(Rating.BAD);
             }
-            if(rating.contentEquals("AVERAGE")){
+            if (rating.contentEquals(i18N.averageRating)) {
                 review.setRating(Rating.AVERAGE);
             }
-            if(rating.contentEquals("GOOD")){
+            if (rating.contentEquals(i18N.goodRating)) {
                 review.setRating(Rating.GOOD);
             }
-        }while (review.getRating()==null);
+        } while (review.getRating() == null);
 
-        review.setCreator(service.findUser());
+        review.setCreator(activeUser);
 
         service.saveReview(selectedMedia, review);
-        this.review=review;
     }
 
-    private void printReviewAverage(){
-        List<Review> reviews=service.findAllReview(selectedMedia);
-        int sum=0;
-        for(Review review : reviews){
-            sum+=Rating.valueOfRating(review.getRating());
+    private void printReviewAverage() {
+        List<Review> reviews = service.findAllReview(selectedMedia);
+        int sum = 0;
+        for (Review review : reviews) {
+            sum += Rating.valueOfRating(review.getRating());
         }
-        io.consoleOut("Average of reviews: "+ sum / selectedMedia.getReviews().size());
+        io.consoleOut(i18N.reviewAverage + sum / selectedMedia.getReviews().size());
     }
 }

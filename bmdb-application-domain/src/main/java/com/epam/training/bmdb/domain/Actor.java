@@ -1,15 +1,29 @@
-package domain;
+package com.epam.training.bmdb.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Actor {
+    @Id
     String name;
     LocalDate born;
+    @Enumerated(EnumType.STRING)
     Sex sex;
     String biography;
+    @ManyToMany
     List<Media> filmography;
+
+    public Actor(){}
 
     private Actor(Builder builder) {
         this.name = builder.name;
@@ -68,12 +82,8 @@ public class Actor {
     }
 
     @Override public String toString() {
-        return "Actor{" +
-            "name='" + name + '\'' +
-            ", born=" + born +
-            ", sex=" + sex +
-            ", biography='" + biography + '\'' +
-            '}';
+        return "\tname= " + name + ", " +
+            "born=" + born+ '\n';
     }
 
     public static final class Builder {

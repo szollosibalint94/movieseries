@@ -1,19 +1,34 @@
-package view;
+package com.epam.training.bmdb.view;
 
 
-import domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.epam.training.bmdb.app.I18N;
+import com.epam.training.bmdb.domain.User;
+import com.epam.training.bmdb.service.ConsoleReviewService;
+
+@Component
 public class ConsoleView implements View {
-    User thisUser=new User();
-    IO io=new IO();
+
+    @Autowired
+    private I18N i18N;
+
+    @Autowired
+    IO io;
+
+    @Autowired ConsoleReviewService service;
 
     @Override public User readUserData() {
-        thisUser.setName(io.consoleIn("What is your name?"));
-        return thisUser;
+        return service.findUser(io.consoleIn(i18N.yourNameMessage));
+    }
+
+    public User readUserData(String id) {
+        return service.findUser(id);
     }
 
     @Override public void printWelcomeMessage(User user) {
-        io.consoleOut("Welcome " + user.getName() + " to the movie and series review application. ");
+        io.consoleOut(i18N.welcomeMessage);
     }
 
     @Override public void printMedias() {

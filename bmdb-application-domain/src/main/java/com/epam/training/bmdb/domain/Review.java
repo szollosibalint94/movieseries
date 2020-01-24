@@ -1,12 +1,30 @@
-package domain;
+package com.epam.training.bmdb.domain;
 
+import org.hibernate.annotations.Cascade;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Component
+@Entity
 public class Review {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     String text;
+    @ManyToOne
     User creator;
+    @ManyToOne
     Media media;
     Rating rating;
 
-    public Review(){}
+    public Review() {
+    }
 
     private Review(Builder builder) {
         this.text = builder.text;
@@ -52,11 +70,9 @@ public class Review {
     }
 
     @Override public String toString() {
-        return "Review{" +
-            "text='" + text + '\'' +
-            ", creator=" + creator +
-            ", rating=" + rating +
-            '}';
+        return "\t" + id +
+            " :'" + text + "\'\n" +
+            " rating=" + rating + '\n';
     }
 
     public static final class Builder {

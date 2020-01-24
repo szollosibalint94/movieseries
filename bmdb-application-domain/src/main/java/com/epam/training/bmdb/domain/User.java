@@ -1,12 +1,21 @@
-package domain;
+package com.epam.training.bmdb.domain;
 
-import java.time.LocalDate;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Component
+@Entity
 public class User {
-    String name;
+    @Id
     String email;
+    String name;
     String passWord;
+    @OneToMany
     List<Review> reviews;
 
     public User(){}

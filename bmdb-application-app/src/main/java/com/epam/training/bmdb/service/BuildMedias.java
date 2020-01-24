@@ -1,28 +1,44 @@
-package service;
+package com.epam.training.bmdb.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.Actor;
-import domain.Media;
-import domain.Movie;
-import domain.Rating;
-import domain.Review;
-import domain.Series;
-import domain.Sex;
-import domain.User;
+import com.epam.training.bmdb.domain.Actor;
+import com.epam.training.bmdb.domain.Media;
+import com.epam.training.bmdb.domain.Movie;
+import com.epam.training.bmdb.domain.Rating;
+import com.epam.training.bmdb.domain.Review;
+import com.epam.training.bmdb.domain.Series;
+import com.epam.training.bmdb.domain.Sex;
+import com.epam.training.bmdb.domain.User;
+import com.epam.training.bmdb.repository.MediaRepository;
 
+@Component
 public class BuildMedias {
+
+    @Autowired MediaRepository mediaRepository;
+
     private List<Media> medias=new ArrayList<>();
 
     User testUser=User.newUser()
         .name("Teszt Elek")
+        .email("test@test.com")
+        .passWord("Passw0rd")
+        .build();
+
+    User me=User.newUser()
+        .name("Urbán Gergely")
+        .email("gergo093@hotmail.com")
+        .passWord("Passw0rd")
         .build();
 
     Media chernobyl=Series.newMedia()
-        .id(BigDecimal.valueOf(1))
+        .id(1L)
         .title("Chernobyl")
         .description("In April 1986, an explosion at the Chernobyl nuclear power plant in the Union of Soviet Socialist Republics becomes one of the world's worst man-made catastrophes.")
         .premier(LocalDate.of(2019,5,7))
@@ -53,7 +69,7 @@ public class BuildMedias {
         .media(chernobyl)
         .rating(Rating.GOOD)
         .text("Excellent series")
-        .creator(testUser)
+        .creator(me)
         .build();
 
     Review chernobyl2= Review.newReview()
@@ -66,7 +82,7 @@ public class BuildMedias {
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     Media starWars= Movie.newMedia()
-        .id(BigDecimal.valueOf(2))
+        .id(2L)
         .title("Star Wars: Episode IX - The Rise of Skywalker")
         .description("The surviving members of the resistance face the First Order once again, and the legendary conflict between the Jedi and the Sith reaches its peak bringing the Skywalker saga to its end.")
         .premier(LocalDate.of(2019,12,19))
@@ -104,7 +120,7 @@ public class BuildMedias {
         .media(starWars)
         .rating(Rating.AVERAGE)
         .text("I don't understand the hype...")
-        .creator(testUser)
+        .creator(me)
         .build();
 
     private void build(){
@@ -129,7 +145,13 @@ public class BuildMedias {
         starWars.addReview(starWars2);
 
         medias.add(chernobyl);
+        mediaRepository.save(chernobyl);
         medias.add(starWars);
+        mediaRepository.save(starWars);
+    }
+
+    public void buildMedias(){
+        build();
     }
 
     public List<Media> getMedias() {

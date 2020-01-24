@@ -1,15 +1,15 @@
-package service;
+package com.epam.training.bmdb.service;
 
 import java.util.List;
 
-import domain.Media;
-import domain.Review;
-import domain.User;
+import com.epam.training.bmdb.domain.Media;
+import com.epam.training.bmdb.domain.Review;
+import com.epam.training.bmdb.domain.User;
 
 public interface Service {
     public void saveUser(User user);
 
-    public User findUser();
+    public User findUser(String id);
 
     public List<Media> findAllMedia();
 

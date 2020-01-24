@@ -1,4 +1,4 @@
-package config;
+package com.epam.training.bmdb.config;
 
 import java.util.Properties;
 
@@ -20,18 +20,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.example.sportsbetting.repository")
+@EnableJpaRepositories(basePackages = "com.epam.training.bmdb.repository")
 public class JpaConfig {
 
-    private static String dbUrl = "jdbc:mysql://localhost/sportsbetting_zoltan_csenyi?serverTimezone=Europe/Budapest";
+    private static String dbUrl = "jdbc:mysql://localhost/bmdb_gergely_urban";
     private static String username = "root";
-    private static String password = "root";
+    private static String password = "Passw0rd";
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan(new String[]{"com.example.sportsbetting.domain"});
+        em.setPackagesToScan(new String[]{"com.epam.training.bmdb.domain"});
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -43,8 +43,9 @@ public class JpaConfig {
     Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        //properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+        properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
         return properties;
     }
 

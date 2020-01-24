@@ -1,29 +1,56 @@
-package service;
+package com.epam.training.bmdb.service;
+
+import javassist.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import domain.Media;
-import domain.Review;
-import domain.User;
-import view.IO;
+import com.epam.training.bmdb.domain.Media;
+import com.epam.training.bmdb.domain.Review;
+import com.epam.training.bmdb.domain.User;
+import com.epam.training.bmdb.repository.MediaRepository;
+import com.epam.training.bmdb.repository.ReviewRepository;
+import com.epam.training.bmdb.repository.UserRepository;
+import com.epam.training.bmdb.view.IO;
 
+@Component
 public class ConsoleReviewService implements Service {
-    IO io=new IO();
-    User user;
+    @Autowired
+    IO io;
+
+    @Autowired UserRepository userRepository;
+    @Autowired ReviewRepository reviewRepository;
+    @Autowired MediaRepository mediaRepository;
+
+    @Autowired BuildMedias buildMedias;
+
+    private Logger LOGGER= LoggerFactory.getLogger(ConsoleReviewService.class);
 
     @Override public void saveUser(User user){
-        this.user=user;
+        userRepository.save(user);
     }
 
-    @Override public User findUser(){
-        return this.user;
+    @Override public User findUser(String id){
+        try {
+            if (id.contains("@")) {
+                return userRepository.findById(id).orElseThrow(() -> new NotFoundException("cannot find user by id " + id));
+            } else {
+                return userRepository.findByName(id).orElseThrow(() -> new NotFoundException("cannot find user by name " + id));
+            }
+        }catch (NotFoundException e){
+            return new User();
+        }
     }
 
     @Override public List<Media> findAllMedia(){
-        BuildMedias buildMedias=new BuildMedias();
+        //buildMedias.buildMedias();
 
-        List<Media> mediaList=buildMedias.getMedias();
-        printMedias(mediaList);
+        List<Media> mediaList=mediaRepository.findAll();
+
+        LOGGER.debug("Medias found");
         return mediaList;
     }
 
@@ -36,6 +63,9 @@ public class ConsoleReviewService implements Service {
     @Override public void saveReview(Media media, Review review){
         media.addReview(review);
         review.setMedia(media);
+        reviewRepository.save(review);
+        mediaRepository.save(media);
+        LOGGER.debug("Review saved");
     }
 
     @Override public List<Review> findAllReview(Media media){

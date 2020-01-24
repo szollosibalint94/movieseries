@@ -1,22 +1,39 @@
-package domain;
+package com.epam.training.bmdb.domain;
+
+import org.hibernate.annotations.Loader;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Media {
-    BigDecimal id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     String title;
     String description;
     LocalDate premier;
+    @OneToMany
     List<Review> reviews;
+    @ManyToMany
     List<Actor> cast;
 
-    public Media() {}
+    public Media() {
+    }
 
     private Media(Builder builder) {
-        this.id=builder.id;
+        this.id = builder.id;
         this.title = builder.title;
         this.description = builder.description;
         this.premier = builder.premier;
@@ -28,11 +45,11 @@ public class Media {
         return new Builder();
     }
 
-    public BigDecimal getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -76,28 +93,30 @@ public class Media {
         this.cast = cast;
     }
 
-    public void addCast(Actor actor){this.cast.add(actor);}
+    public void addCast(Actor actor) {
+        this.cast.add(actor);
+    }
 
-    public void addReview(Review review){this.reviews.add(review);}
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
 
     @Override public String toString() {
-        return id + ": " +
-            "Media{" +
-            "Title='" + title + '\'' +
-            ", Description='" + description + '\'' +
-            ", Premier=" + premier +
-            ", Cast=" + cast +
-            ", Reviews=" + reviews +
-            '}';
+        return id + ":" +
+            "'" + title + "\'\n" +
+            " Description='" + description + "\'\n" +
+            " Premier=" + premier + '\n' +
+            " Cast= \n" + cast + '\n' +
+            " Reviews=" + reviews ;
     }
 
     public static final class Builder {
-        private BigDecimal id;
+        private Long id;
         private String title;
         private String description;
         private LocalDate premier;
-        private List<Review> reviews=new ArrayList<>();
-        private List<Actor> cast=new ArrayList<>();
+        private List<Review> reviews = new ArrayList<>();
+        private List<Actor> cast = new ArrayList<>();
 
         private Builder() {
         }
@@ -106,8 +125,8 @@ public class Media {
             return new Media(this);
         }
 
-        public Builder id(BigDecimal id){
-            this.id=id;
+        public Builder id(Long id) {
+            this.id = id;
             return this;
         }
 

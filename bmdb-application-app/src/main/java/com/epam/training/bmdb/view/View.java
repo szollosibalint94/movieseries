@@ -1,6 +1,6 @@
-package view;
+package com.epam.training.bmdb.view;
 
-import domain.User;
+import com.epam.training.bmdb.domain.User;
 
 public interface View {
     User readUserData();

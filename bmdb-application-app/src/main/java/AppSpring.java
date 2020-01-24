@@ -1,5 +1,5 @@
-import app.App;
-import config.AppConfig;
+import com.epam.training.bmdb.app.App;
+import com.epam.training.bmdb.config.AppConfig;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
