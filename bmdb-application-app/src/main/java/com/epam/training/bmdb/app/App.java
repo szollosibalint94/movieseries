@@ -14,10 +14,7 @@ import com.epam.training.bmdb.service.ConsoleReviewService;
 
 public class App {
     @Autowired
-    private Review review;
-    @Autowired
-    private IO io;
-
+    IO io;
     @Autowired
     private ConsoleReviewService service;
     @Autowired
@@ -59,6 +56,7 @@ public class App {
     }
 
     private void doReview() {
+        Review review = new Review();
         if (medias == null) {
             medias = service.findAllMedia();
         }

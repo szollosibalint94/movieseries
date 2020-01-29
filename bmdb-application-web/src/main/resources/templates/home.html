@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>BMDB</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <link href="../css/sportsbetting.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div th:replace="navBar"></div>
+
+<!-- USER DETAILS -->
+<div class="card border-primary mb-3 mt-3 ml-3 mr-3" id="accountCard">
+  <div class="card-header bg-primary text-white">Account details</div>
+  <div class="card-body">
+    <form action="#" th:action="@{/}" th:object="${user}" method="post">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="nameField">Name</span>
+        </div>
+        <input type="text" th:field="*{name}" class="form-control"
+               placeholder="Arnold Schwarzenegger" aria-label="Username"
+               aria-describedby="basic-addon1" id="name"/>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="emailField">E-mail</span>
+        </div>
+        <input type="text" th:field="*{email}" class="form-control"
+               placeholder="iwillbeback@terminator.com" aria-label="Username"
+               aria-describedby="basic-addon1" id="email"/>
+      </div>
+      <button class="btn btn-primary" type="submit" id="saveAccountButton">Save</button>
+    </form>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="card border-primary mb-3 mt-3 ml-3 mr-3" id="reviewCard">
+  <div class="card-header text-white bg-primary">Reviews</div>
+  <div class="card-body">
+    <form action="#" th:action="@{/}" th:object="${reviews}" method="get">
+      <table class="table" id="reviews">
+        <thead>
+        <tr>
+          <th scope="col" width="100"></th>
+          <th scope="col">Review text</th>
+          <th scope="col">Creator</th>
+          <th scope="col">Associated media</th>
+          <th scope="col">Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="review : ${reviews}">
+          <th scope="col" width="100"><a th:href="@{delete/__${review.id}__}" class="btn btn-primary">Delete review</a></th>
+          <th scope="col" th:text="${review.text}">Review text</th>
+          <th scope="col" th:text="${review.creator.name}">Creator</th>
+          <th scope="col" th:text="${review.media.title}">Associated media</th>
+          <th scope="col" th:text="${review.rating}">Rating</th>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+</body>
+</html>

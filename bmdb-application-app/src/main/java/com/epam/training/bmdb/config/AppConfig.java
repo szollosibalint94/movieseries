@@ -18,7 +18,7 @@ import javax.inject.Inject;
 @Import({I18NConfig.class})
 @ComponentScan("com.epam.training.bmdb")
 public class AppConfig {
-    @Value("hu")
+    @Value("en")
     private Locale locale;
 
     @Bean

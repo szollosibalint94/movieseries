@@ -1,9 +1,11 @@
 package com.epam.training.bmdb.domain;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -15,10 +17,11 @@ public class User {
     String email;
     String name;
     String passWord;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Review> reviews;
 
-    public User(){}
+    public User() {
+    }
 
     private User(Builder builder) {
         this.name = builder.name;

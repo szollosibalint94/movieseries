@@ -1,14 +1,11 @@
 package com.epam.training.bmdb.domain;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Component
 @Entity
 public class Review {
     @Id
@@ -25,6 +22,7 @@ public class Review {
     }
 
     private Review(Builder builder) {
+        this.id=builder.id;
         this.text = builder.text;
         this.creator = builder.creator;
         this.media = builder.media;
@@ -33,6 +31,10 @@ public class Review {
 
     public static Builder newReview() {
         return new Builder();
+    }
+
+    public Long getId(){
+        return id;
     }
 
     public String getText() {
@@ -74,6 +76,7 @@ public class Review {
     }
 
     public static final class Builder {
+        private Long id;
         private String text;
         private User creator;
         private Media media;
@@ -84,6 +87,11 @@ public class Review {
 
         public Review build() {
             return new Review(this);
+        }
+
+        public Builder id(Long id){
+            this.id=id;
+            return this;
         }
 
         public Builder text(String text) {

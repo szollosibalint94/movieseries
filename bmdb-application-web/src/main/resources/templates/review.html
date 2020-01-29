@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div th:replace="navBar"></div>
+
+<div class="card border-primary mb-3 mt-3 ml-3 mr-3" id="reviewCard">
+  <div class="card-header bg-primary text-white" th:text="Reviews"></div>
+  <div class="card-body">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">User</th>
+          <th scope="col" >Review</th>
+          <th scope="col" >Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="review : ${media.reviews}">
+          <th scope="col" th:text="${review.creator.name}"></th>
+          <th scope="col" th:text="${review.text}"></th>
+          <th scope="col" th:text="${review.rating}"></th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="card border-primary mb-3 mt-3 ml-3 mr-3" id="accountCard">
+  <div class="card-header bg-primary text-white" th:text="${media.title}"></div>
+  <div class="card-body">
+    <form action="#" th:action="@{/bmdb/save }" th:object="${review}" method="post">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="textField">Review text</span>
+        </div>
+        <input type="text" th:field="*{text}" class="form-control"
+               placeholder="Review text" aria-label="Text"
+               aria-describedby="basic-addon1" id="text"/>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="ratingField">Rating</span>
+        </div>
+        <select type="se" th:field="*{rating}" class="form-control" aria-label="Rating"
+                aria-describedby="basic-addon1" id="rating">
+          <option th:value="GOOD" th:text="GOOD"></option>
+          <option th:value="AVERAGE" th:text="AVERAGE"></option>
+          <option th:value="BAD" th:text="BAD"></option>
+        </select>
+      </div>
+      <button class="btn btn-primary" type="submit" id="saveReviewButton">Save</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
