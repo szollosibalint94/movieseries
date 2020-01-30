@@ -1,10 +1,16 @@
 package com.epam.training.bmdb.domain;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -17,14 +23,19 @@ public class User {
     String passWord;
     @OneToMany
     List<Review> reviews;
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = UserRole.class)
+    List<UserRole> roles;
 
-    public User(){}
+    public User() {
+    }
 
     private User(Builder builder) {
         this.name = builder.name;
         this.email = builder.email;
         this.passWord = builder.passWord;
         this.reviews = builder.reviews;
+        this.roles=builder.userRoles;
     }
 
     public static Builder newUser() {
@@ -63,6 +74,10 @@ public class User {
         this.reviews = reviews;
     }
 
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
+
     @Override public String toString() {
         return "User{" +
             "name='" + name + '\'' +
@@ -75,7 +90,8 @@ public class User {
         private String name;
         private String email;
         private String passWord;
-        private List<Review> reviews;
+        private List<Review> reviews = new ArrayList<>();
+        private List<UserRole> userRoles= new ArrayList<>();
 
         private Builder() {
         }
@@ -101,6 +117,11 @@ public class User {
 
         public Builder reviews(List<Review> reviews) {
             this.reviews = reviews;
+            return this;
+        }
+
+        public Builder addrole(UserRole role){
+            this.userRoles.add(role);
             return this;
         }
     }

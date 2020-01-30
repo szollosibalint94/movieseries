@@ -76,6 +76,7 @@ public class Review {
     }
 
     public static final class Builder {
+        private Long id;
         private String text;
         private User creator;
         private Media media;
@@ -86,6 +87,11 @@ public class Review {
 
         public Review build() {
             return new Review(this);
+        }
+
+        public Builder id(Long id){
+            this.id=id;
+            return this;
         }
 
         public Builder text(String text) {

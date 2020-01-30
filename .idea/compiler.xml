@@ -10,5 +10,8 @@
         <module name="bmdb-application-app" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bmdb-application-web" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
