@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,9 +23,10 @@ public class Media {
     String title;
     String description;
     LocalDate premier;
-    @OneToMany(mappedBy ="media", cascade = CascadeType.ALL)
+    @Enumerated(EnumType.STRING)
+    @OneToMany(cascade = CascadeType.ALL)
     List<Review> reviews;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     List<Actor> cast;
 
     public Long getId() {

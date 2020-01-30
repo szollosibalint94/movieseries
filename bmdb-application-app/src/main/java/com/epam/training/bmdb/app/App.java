@@ -7,10 +7,12 @@ import java.util.List;
 import com.epam.training.bmdb.domain.Media;
 import com.epam.training.bmdb.domain.Rating;
 import com.epam.training.bmdb.domain.Review;
+import com.epam.training.bmdb.service.Service;
 import com.epam.training.bmdb.view.ConsoleView;
 import com.epam.training.bmdb.view.IO;
 import com.epam.training.bmdb.domain.User;
 import com.epam.training.bmdb.service.ConsoleReviewService;
+import com.epam.training.bmdb.view.View;
 
 public class App {
     @Autowired

@@ -16,7 +16,6 @@ import com.epam.training.bmdb.repository.ReviewRepository;
 import com.epam.training.bmdb.repository.UserRepository;
 
 @Controller
-@RequestMapping("/bmdb")
 public class ReviewController {
 
     @Autowired MediaRepository mediaRepository;
@@ -41,6 +40,6 @@ public class ReviewController {
         media.addReview(review);
         reviewRepository.save(review);
         mediaRepository.save(media);
-        return "redirect:/bmdb/media";
+        return "redirect:/media";
     }
 }

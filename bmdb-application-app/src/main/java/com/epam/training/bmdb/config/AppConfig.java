@@ -1,8 +1,5 @@
 package com.epam.training.bmdb.config;
 
-import com.epam.training.bmdb.app.App;
-import com.epam.training.bmdb.app.I18N;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +10,9 @@ import org.springframework.context.annotation.Import;
 import java.util.Locale;
 
 import javax.inject.Inject;
+
+import com.epam.training.bmdb.app.App;
+import com.epam.training.bmdb.app.I18N;
 
 @Configuration
 @Import({I18NConfig.class})

@@ -1,0 +1,34 @@
+  .dropdown-item {
+  	background-color: #343b40;
+    color:#f8f9fa;
+  }
+  
+  .dropdown-menu{
+	  background-color: #343b40;
+  }
+  
+  .margin-all{
+	  margin:50px;
+  }
+  
+  .card-custom-width{
+	  width:300px;
+	  border-radius:20px;
+	  overflow: hidden;
+  }
+  
+  .input-width{
+	  width:250px;
+  }
+  
+  .marginTop{
+	  margin-top:50px;
+  }
+  
+  .card{
+	  margin-top:50px;
+  }
+  
+.validation-error {
+    color: red;
+}

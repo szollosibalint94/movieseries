@@ -1,6 +1,9 @@
 package com.epam.training.bmdb.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,10 +15,11 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String text;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     User creator;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     Media media;
+    @Enumerated(EnumType.STRING)
     Rating rating;
 
     public Review() {

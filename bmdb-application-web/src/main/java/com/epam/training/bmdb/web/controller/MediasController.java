@@ -11,7 +11,6 @@ import com.epam.training.bmdb.domain.Media;
 import com.epam.training.bmdb.repository.MediaRepository;
 
 @Controller
-@RequestMapping(path = "/bmdb")
 public class MediasController {
 
     @Autowired MediaRepository mediaRepository;

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-			xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+			xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-	<title>SportsBet</title>
-	<script type="text/javascript" src="assets/js/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css"
-				href="assets/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="assets/css/login.css" />
-	<link rel="stylesheet" type="text/css" href="assets/css/custom.css" />
+	<title>BMDB</title>
+	<link rel="icon" href="/icon.ico">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <body>
 <form>
@@ -21,27 +20,24 @@
 <div class="margin-all">
 	<div>
 		<h2>
-			<a href="#">Login</a> or <a href="#">Register</a> to start!
+			<a href="#">Login</a> or <a href="/register">Register</a> to start!
 		</h2>
 	</div>
 
 	<div class="card border-primary card-custom-width">
 		<div class="card-header bg-primary text-white">Login</div>
 		<div class="card-body">
-			<th:form modelAttribute="loginRequest"
-								 action="home">
-				<div class="form-group input-width">
-					<th:input path="username" cssClass="form-control"
-											id="username" placeholder="Username" />
-				</div>
-				<div class="form-group input-width">
-					<th:password path="password" cssClass="form-control"
-												 id="password" placeholder="Password"  />
-				</div>
-				<p>
-					<button type="submit" class="btn btn-primary">Login</button>
-				</p>
-			</th:form>
+			<div th:if="${param.error}">
+				Invalid username or password.
+			</div>
+			<div th:if="${param.logout}">
+				You have been logged out.
+			</div>
+			<form th:action="@{/login}" method="post">
+				<div><label> User Name : <input type="text" name="username"/> </label></div>
+				<div><label> Password: <input type="password" name="password"/> </label></div>
+				<div><button class="btn btn-primary" type="submit">Sign In</button></div>
+			</form>
 		</div>
 	</div>
 </div>

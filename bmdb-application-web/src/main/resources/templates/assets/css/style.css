@@ -1,0 +1,47 @@
+.color-black {
+	color: rgba(0, 0, 0, 1.0);
+}
+.color-dark {
+	color: rgba(52, 59, 64, 1.0);
+}
+.color-medium {
+	color: rgba(128, 151, 160, 1.0);
+}
+.color-light {
+	color: rgba(233, 236, 239, 1.0);
+}
+.color-blue {
+	color: rgba(0, 156, 216, 1.0);
+}
+.color-bright-blue {
+	color: rgba(0, 128, 249, 1.0);
+}
+.color-white {
+	color: rgba(255, 255, 255, 1.0);
+}
+
+.background-black {
+	background: rgba(0, 0, 0, 1.0);
+}
+.background-dark {
+	background: rgba(52, 59, 64, 1.0);
+}
+.background-medium {
+	background: rgba(128, 151, 160, 1.0);
+}
+.background-light {
+	background: rgba(233, 236, 239, 1.0);
+}
+.background-blue {
+	background: rgba(0, 156, 216, 1.0);
+}
+.background-bright-blue {
+	background: rgba(0, 128, 249, 1.0);
+}
+.background-white {
+	background: rgba(255, 255, 255, 1.0);
+}
+
+.padding {
+	padding-top: 30px;
+}

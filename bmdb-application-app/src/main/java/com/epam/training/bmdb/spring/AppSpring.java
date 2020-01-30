@@ -1,13 +1,16 @@
 package com.epam.training.bmdb.spring;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-@SpringBootApplication
-@ComponentScan("com.epam.training.bmdb.*")
+import com.epam.training.bmdb.app.App;
+import com.epam.training.bmdb.config.AppConfig;
+
 public class AppSpring {
     public static void main(String[] args) {
-        SpringApplication.run(AppSpring.class, args);
+        try (ConfigurableApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class)) {
+            App app = appContext.getBean(App.class);
+            app.play();
+        }
     }
 }

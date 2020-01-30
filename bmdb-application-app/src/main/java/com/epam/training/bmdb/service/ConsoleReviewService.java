@@ -46,7 +46,7 @@ public class ConsoleReviewService implements Service {
     }
 
     @Override public List<Media> findAllMedia(){
-        //buildMedias.buildMedias();
+        buildMedias.buildMedias();
 
         List<Media> mediaList=mediaRepository.findAll();
 
