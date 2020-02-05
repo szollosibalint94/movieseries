@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,7 +19,7 @@ public class Actor {
     @Enumerated(EnumType.STRING)
     Sex sex;
     String biography;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     List<Media> filmography;
 
     public Actor(){}

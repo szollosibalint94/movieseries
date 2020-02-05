@@ -1,6 +1,5 @@
 package com.epam.training.bmdb.domain;
 
-import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,21 +10,28 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Component
 @Entity
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     String email;
     String name;
     String passWord;
+    @Transient
+    private String passwordConfirm;
     @OneToMany(cascade = CascadeType.ALL)
     List<Review> reviews;
-    @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = UserRole.class)
-    List<UserRole> roles;
+    @ManyToMany(cascade = CascadeType.ALL)
+    List<Role> roles;
 
     public User() {
     }
@@ -35,11 +41,19 @@ public class User {
         this.email = builder.email;
         this.passWord = builder.passWord;
         this.reviews = builder.reviews;
-        this.roles=builder.userRoles;
+        this.roles = builder.roles;
     }
 
     public static Builder newUser() {
         return new Builder();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -66,6 +80,14 @@ public class User {
         this.passWord = passWord;
     }
 
+    public void setPasswordConfirm(String passwordConfirm){
+        this.passwordConfirm=passwordConfirm;
+    }
+
+    public String getPasswordConfirm(){
+        return this.passwordConfirm;
+    }
+
     public List<Review> getReviews() {
         return reviews;
     }
@@ -76,6 +98,14 @@ public class User {
 
     public void addReview(Review review) {
         this.reviews.add(review);
+    }
+
+    public List<Role> getRoles() {
+        return this.roles;
+    }
+
+    public void setRoles(List<Role> roles){
+        this.roles=roles;
     }
 
     @Override public String toString() {
@@ -91,7 +121,7 @@ public class User {
         private String email;
         private String passWord;
         private List<Review> reviews = new ArrayList<>();
-        private List<UserRole> userRoles= new ArrayList<>();
+        private List<Role> roles = new ArrayList<>();
 
         private Builder() {
         }
@@ -120,8 +150,8 @@ public class User {
             return this;
         }
 
-        public Builder addrole(UserRole role){
-            this.userRoles.add(role);
+        public Builder addrole(Role role) {
+            this.roles.add(role);
             return this;
         }
     }

@@ -27,8 +27,8 @@
 
 <h1 th:text="${mediaTitle}"/>
 
-<div class="card border-primary mb-3 mt-3 ml-3 mr-3" id="mediaCard">
-  <div class="card-header text-white bg-primary" th:text="${media.title}"></div>
+<div class="card border-secondary mb-3 mt-3 ml-3 mr-3" id="mediaCard">
+  <div class="card-header text-white bg-secondary" th:text="${media.title}"></div>
   <div class="card-body">
     <form action="#" th:action="@{/}" th:object="${media}" method="get">
       <label th:text="${media.description}"></label>
@@ -37,17 +37,17 @@
 </div>
 
 <!-- REVIEWS -->
-<div class="card border-primary mb-3 mt-3 ml-3 mr-3" id="castCard">
-  <div class="card-header text-white bg-primary">Cast</div>
+<div class="card border-secondary mb-3 mt-3 ml-3 mr-3" id="castCard">
+  <div class="card-header text-white bg-secondary" th:text="#{castPage.cast}">Cast</div>
   <div class="card-body">
     <form action="#" th:action="@{/}" th:object="${media}" method="get">
       <table class="table" id="cast">
         <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Biography</th>
-          <th scope="col">Born</th>
-          <th scope="col" >Sex</th>
+          <th scope="col" th:text="#{castPage.name}">Name</th>
+          <th scope="col" th:text="#{castPage.biography}">Biography</th>
+          <th scope="col" th:text="#{castPage.born}">Born</th>
+          <th scope="col" th:text="#{castPage.sex}">Sex</th>
 
         </tr>
         </thead>

@@ -7,12 +7,10 @@ import java.util.List;
 import com.epam.training.bmdb.domain.Media;
 import com.epam.training.bmdb.domain.Rating;
 import com.epam.training.bmdb.domain.Review;
-import com.epam.training.bmdb.service.Service;
-import com.epam.training.bmdb.view.ConsoleView;
-import com.epam.training.bmdb.view.IO;
 import com.epam.training.bmdb.domain.User;
 import com.epam.training.bmdb.service.ConsoleReviewService;
-import com.epam.training.bmdb.view.View;
+import com.epam.training.bmdb.view.ConsoleView;
+import com.epam.training.bmdb.view.IO;
 
 public class App {
     @Autowired
@@ -23,9 +21,6 @@ public class App {
     private ConsoleView view;
     @Autowired
     User activeUser;
-
-    @Autowired
-    private I18N i18N;
 
     List<Media> medias;
     Media selectedMedia;
@@ -42,16 +37,16 @@ public class App {
         do {
             doReview();
             printReviewAverage();
-            anotherReview = io.consoleIn(i18N.otherReviewMessage).toUpperCase();
-        } while (anotherReview.contentEquals(i18N.otherReviewYes));
+            anotherReview = io.consoleIn("Do you want to write another review? (yes/no)").toUpperCase();
+        } while (anotherReview.contentEquals("YES"));
     }
 
     private void createUser() {
-        io.consoleOut(i18N.registerMessage);
+        io.consoleOut("You have to register to use the application!");
         User newUser = new User();
-        newUser.setName(io.consoleIn(i18N.yourNameMessage));
-        newUser.setEmail(io.consoleIn(i18N.emailMessage));
-        newUser.setPassWord(io.consoleIn(i18N.passWordMessage));
+        newUser.setName(io.consoleIn("What is your name?"));
+        newUser.setEmail(io.consoleIn("Type your e-mail address"));
+        newUser.setPassWord(io.consoleIn("Type your password"));
 
         service.saveUser(newUser);
         activeUser = view.readUserData(newUser.getEmail());
@@ -66,7 +61,7 @@ public class App {
         service.printMedias(medias);
 
         do {
-            long id = Long.parseLong(io.consoleIn(i18N.chooseId));
+            long id = Long.parseLong(io.consoleIn("Choose an id"));
 
             int i = 0;
             while (i < medias.size() && !medias.get(i).getId().equals(id)) {
@@ -77,17 +72,17 @@ public class App {
             }
         } while (selectedMedia == null);
 
-        review.setText(io.consoleIn(i18N.writeReview));
+        review.setText(io.consoleIn("Write a review"));
 
         do {
-            String rating = io.consoleIn(i18N.chooseRatingMessage).toUpperCase();
-            if (rating.contentEquals(i18N.badRating)) {
+            String rating = io.consoleIn("Choose a rating! (BAD, AVERAGE, GOOD)").toUpperCase();
+            if (rating.contentEquals("BAD")) {
                 review.setRating(Rating.BAD);
             }
-            if (rating.contentEquals(i18N.averageRating)) {
+            if (rating.contentEquals("AVERAGE")) {
                 review.setRating(Rating.AVERAGE);
             }
-            if (rating.contentEquals(i18N.goodRating)) {
+            if (rating.contentEquals("GOOD")) {
                 review.setRating(Rating.GOOD);
             }
         } while (review.getRating() == null);
@@ -103,6 +98,6 @@ public class App {
         for (Review review : reviews) {
             sum += Rating.valueOfRating(review.getRating());
         }
-        io.consoleOut(i18N.reviewAverage + sum / selectedMedia.getReviews().size());
+        io.consoleOut("Average of reviews: " + sum / selectedMedia.getReviews().size());
     }
 }

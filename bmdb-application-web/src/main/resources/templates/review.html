@@ -8,15 +8,15 @@
 <body>
 <div th:replace="navBar"></div>
 
-<div class="card border-primary mb-3 mt-3 ml-3 mr-3" id="reviewCard">
-  <div class="card-header bg-primary text-white" th:text="Reviews"></div>
+<div class="card border-secondary mb-3 mt-3 ml-3 mr-3" id="reviewCard">
+  <div class="card-header bg-secondary text-white" th:text="#{reviewPage.reviews}"></div>
   <div class="card-body">
     <table>
       <thead>
         <tr>
-          <th scope="col">User</th>
-          <th scope="col" >Review</th>
-          <th scope="col" >Rating</th>
+          <th scope="col" th:text="#{reviewPage.user}">User</th>
+          <th scope="col" th:text="#{reviewPage.review}">Review</th>
+          <th scope="col" th:text="#{reviewPage.rating}">Rating</th>
         </tr>
       </thead>
       <tbody>
@@ -31,13 +31,13 @@
 </div>
 
 
-<div class="card border-primary mb-3 mt-3 ml-3 mr-3" id="accountCard">
-  <div class="card-header bg-primary text-white" th:text="${media.title}"></div>
+<div class="card border-secondary mb-3 mt-3 ml-3 mr-3" id="accountCard">
+  <div class="card-header bg-secondary text-white" th:text="${media.title}"></div>
   <div class="card-body">
-    <form action="#" th:action="@{/bmdb/save }" th:object="${review}" method="post">
+    <form action="#" th:action="@{/saveReview}" th:object="${review}" method="post">
       <div class="input-group">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="textField">Review text</span>
+          <span class="input-group-text" id="textField" th:text="#{reviewPage.reviewText}">Review text</span>
         </div>
         <input type="text" th:field="*{text}" class="form-control"
                placeholder="Review text" aria-label="Text"
@@ -45,7 +45,7 @@
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="ratingField">Rating</span>
+          <span class="input-group-text" id="ratingField" th:text="#{reviewPage.rating}">Rating</span>
         </div>
         <select type="se" th:field="*{rating}" class="form-control" aria-label="Rating"
                 aria-describedby="basic-addon1" id="rating">
@@ -54,7 +54,7 @@
           <option th:value="BAD" th:text="BAD"></option>
         </select>
       </div>
-      <button class="btn btn-primary" type="submit" id="saveReviewButton">Save</button>
+      <button class="btn btn-secondary" type="submit" id="saveReviewButton" th:text="#{reviewPage.save}">Save</button>
     </form>
   </div>
 </div>

@@ -1,6 +1,7 @@
 package com.epam.training.bmdb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -15,7 +16,7 @@ import com.epam.training.bmdb.domain.Review;
 import com.epam.training.bmdb.domain.Series;
 import com.epam.training.bmdb.domain.Sex;
 import com.epam.training.bmdb.domain.User;
-import com.epam.training.bmdb.domain.UserRole;
+import com.epam.training.bmdb.domain.Role;
 import com.epam.training.bmdb.repository.MediaRepository;
 
 @Component
@@ -23,25 +24,27 @@ public class BuildMedias {
 
     @Autowired MediaRepository mediaRepository;
 
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
+
     private List<Media> medias = new ArrayList<>();
 
     private void build() {
         User testUser = User.newUser()
             .name("Teszt Elek")
             .email("test@test.com")
-            .passWord("Passw0rd")
-            .addrole(UserRole.ROLE_USER)
+            .passWord(bCryptPasswordEncoder.encode("Passw0rd"))
+            .addrole(new Role("USER"))
             .build();
 
         User me = User.newUser()
             .name("Urbán Gergely")
             .email("gergo093@hotmail.com")
-            .passWord("Passw0rd")
-            .addrole(UserRole.ROLE_ADMIN)
+            .passWord(bCryptPasswordEncoder.encode("Passw0rd"))
+            .addrole(new Role("ADMIN"))
             .build();
 
         Media chernobyl = Series.newSeries()
-            .id(1L)
             .title("Chernobyl")
             .description(
                 "In April 1986, an explosion at the Chernobyl nuclear power plant in the Union of Soviet Socialist Republics becomes one of the world's worst man-made catastrophes.")
@@ -72,25 +75,22 @@ public class BuildMedias {
             .build();
 
         Review chernobyl1 = Review.newReview()
-            .id(1L)
             .media(chernobyl)
             .rating(Rating.GOOD)
             .text("Excellent series")
-            .creator(me)
+            .creator(testUser)
             .build();
 
         Review chernobyl2 = Review.newReview()
-            .id(2L)
             .media(chernobyl)
             .rating(Rating.AVERAGE)
             .text("I don't understand the hype...")
-            .creator(testUser)
+            .creator(me)
             .build();
 
         //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         Media starWars = Movie.newMovie()
-            .id(2L)
             .title("Star Wars: Episode IX - The Rise of Skywalker")
             .description(
                 "The surviving members of the resistance face the First Order once again, and the legendary conflict between the Jedi and the Sith reaches its peak bringing the Skywalker saga to its end.")
@@ -121,7 +121,6 @@ public class BuildMedias {
             .build();
 
         Review starWars1 = Review.newReview()
-            .id(3L)
             .media(starWars)
             .rating(Rating.GOOD)
             .text("Excellent movie")
@@ -129,7 +128,6 @@ public class BuildMedias {
             .build();
 
         Review starWars2 = Review.newReview()
-            .id(4L)
             .media(starWars)
             .rating(Rating.AVERAGE)
             .text("I don't understand the hype...")
@@ -139,7 +137,6 @@ public class BuildMedias {
         //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         Media fordFerrari = Movie.newMovie()
-            .id(3L)
             .title("Ford v Ferrari")
             .description("American car designer Carroll Shelby and driver Ken Miles battle corporate interference, the laws of physics and their own personal demons to build a revolutionary race car for Ford and challenge Ferrari at the 24 Hours of Le Mans in 1966.")
             .premier(LocalDate.of(2019, 11, 15))
@@ -184,7 +181,6 @@ public class BuildMedias {
         //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         Media inception = Movie.newMovie()
-            .id(4L)
             .title("Inception")
             .description(
                 "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.")

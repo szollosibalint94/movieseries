@@ -11,8 +11,6 @@ import com.epam.training.bmdb.service.ConsoleReviewService;
 @Component
 public class ConsoleView implements View {
 
-    @Autowired
-    private I18N i18N;
 
     @Autowired
     IO io;
@@ -20,7 +18,7 @@ public class ConsoleView implements View {
     @Autowired ConsoleReviewService service;
 
     @Override public User readUserData() {
-        return service.findUser(io.consoleIn(i18N.yourNameMessage));
+        return service.findUser(io.consoleIn("What is your name?"));
     }
 
     public User readUserData(String id) {
@@ -28,7 +26,7 @@ public class ConsoleView implements View {
     }
 
     @Override public void printWelcomeMessage(User user) {
-        io.consoleOut(i18N.welcomeMessage);
+        io.consoleOut("Welcome toBMDB");
     }
 
     @Override public void printMedias() {

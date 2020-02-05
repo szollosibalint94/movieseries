@@ -10,11 +10,11 @@ import java.util.List;
 
 import com.epam.training.bmdb.domain.Media;
 import com.epam.training.bmdb.domain.Review;
+import com.epam.training.bmdb.domain.User;
 import com.epam.training.bmdb.repository.MediaRepository;
 import com.epam.training.bmdb.repository.ReviewRepository;
 import com.epam.training.bmdb.repository.UserRepository;
 import com.epam.training.bmdb.view.IO;
-import com.epam.training.bmdb.domain.User;
 
 @Component
 public class ConsoleReviewService implements Service {
@@ -27,40 +27,36 @@ public class ConsoleReviewService implements Service {
 
     @Autowired BuildMedias buildMedias;
 
-    private Logger LOGGER= LoggerFactory.getLogger(ConsoleReviewService.class);
+    private Logger LOGGER = LoggerFactory.getLogger(ConsoleReviewService.class);
 
-    @Override public void saveUser(User user){
+    @Override public void saveUser(User user) {
         userRepository.save(user);
     }
 
-    @Override public User findUser(String id){
-        try {
-            if (id.contains("@")) {
-                return userRepository.findById(id).orElseThrow(() -> new NotFoundException("cannot find user by id " + id));
-            } else {
-                return userRepository.findByName(id).orElseThrow(() -> new NotFoundException("cannot find user by name " + id));
-            }
-        }catch (NotFoundException e){
-            return new User();
+    @Override public User findUser(String id) {
+        if (id.contains("@")) {
+            return userRepository.findByEmail(id);
+        } else {
+            return userRepository.findByEmail(id);
         }
     }
 
-    @Override public List<Media> findAllMedia(){
+    @Override public List<Media> findAllMedia() {
         buildMedias.buildMedias();
 
-        List<Media> mediaList=mediaRepository.findAll();
+        List<Media> mediaList = mediaRepository.findAll();
 
         LOGGER.debug("Medias found");
         return mediaList;
     }
 
-    public void printMedias(List<Media> medias){
-        for (Media media: medias) {
+    public void printMedias(List<Media> medias) {
+        for (Media media : medias) {
             io.consoleOut(media.toString());
         }
     }
 
-    @Override public void saveReview(Media media, Review review){
+    @Override public void saveReview(Media media, Review review) {
         media.addReview(review);
         review.setMedia(media);
         reviewRepository.save(review);
@@ -68,7 +64,7 @@ public class ConsoleReviewService implements Service {
         LOGGER.debug("Review saved");
     }
 
-    @Override public List<Review> findAllReview(Media media){
+    @Override public List<Review> findAllReview(Media media) {
         return media.getReviews();
     }
 }

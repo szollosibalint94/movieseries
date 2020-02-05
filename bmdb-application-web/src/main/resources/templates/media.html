@@ -25,18 +25,18 @@
 <div th:replace="navBar"></div>
 
 <!-- REVIEWS -->
-<div class="card border-primary mb-3 mt-3 ml-3 mr-3" id="reviewCard">
-  <div class="card-header text-white bg-primary">Media list</div>
+<div class="card border-secondary mb-3 mt-3 ml-3 mr-3" id="reviewCard">
+  <div class="card-header text-white bg-secondary" th:text="#{mediaPage.mediaList}">Media list</div>
   <div class="card-body">
     <form action="#" th:action="@{/}" th:object="${medias}" method="get">
       <table class="table" id="medias">
         <thead>
         <tr>
-          <th scope="col">Title</th>
-          <th scope="col">Description</th>
-          <th scope="col">Premier</th>
-          <th scope="col" width="100">Cast</th>
-          <th scope="col" width="100">Review</th>
+          <th scope="col" th:text="#{mediaPage.title}">Title</th>
+          <th scope="col" th:text="#{mediaPage.description}">Description</th>
+          <th scope="col" th:text="#{mediaPage.premier}">Premier</th>
+          <th scope="col" width="100" th:text="#{mediaPage.cast}">Cast</th>
+          <th scope="col" width="100" th:text="#{mediaPage.review}">Review</th>
 
         </tr>
         </thead>
@@ -45,8 +45,8 @@
           <th scope="col" th:text="${media.title}">#</th>
           <th scope="col" th:text="${media.description}">Review text</th>
           <th scope="col" th:text="${media.premier}">Creator</th>
-          <th scope="col" ><a th:href="@{media/__${media.id}__}" class="btn btn-primary">Cast</a></th>
-          <th scope="col"><a th:href="@{review/__${media.id}__}" class="btn btn-primary">Reviews</a></th>
+          <th scope="col" ><a th:href="@{media/__${media.id}__}" class="btn btn-secondary" th:text="#{mediaPage.castButton}">Cast</a></th>
+          <th scope="col"><a th:href="@{review/__${media.id}__}" class="btn btn-secondary" th:text="#{mediaPage.reviewButton}">Reviews</a></th>
         </tr>
         </tbody>
       </table>

@@ -9,7 +9,6 @@ import java.util.Optional;
 import com.epam.training.bmdb.domain.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
-    @Query
-    Optional<User> findByName(String name);
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByEmail(String username);
 }

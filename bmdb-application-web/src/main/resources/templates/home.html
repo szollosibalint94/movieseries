@@ -18,20 +18,19 @@
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-  <link href="../css/sportsbetting.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
 <div th:replace="navBar"></div>
 
 <!-- USER DETAILS -->
-<div class="card border-primary mb-3 mt-3 ml-3 mr-3" id="accountCard">
-  <div class="card-header bg-primary text-white">Account details</div>
+<div class="card border-secondary mb-3 mt-3 ml-3 mr-3" id="accountCard">
+  <div class="card-header bg-secondary text-white" th:text="#{homePage.acoountDetails}">Account details</div>
   <div class="card-body">
     <form action="#" th:action="@{/}" th:object="${user}" method="post">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="nameField">Name</span>
+          <span class="input-group-text" id="nameField" th:text="#{homePage.name}">Name</span>
         </div>
         <input type="text" th:field="*{name}" class="form-control"
                placeholder="Arnold Schwarzenegger" aria-label="Username"
@@ -45,30 +44,30 @@
                placeholder="iwillbeback@terminator.com" aria-label="Username"
                aria-describedby="basic-addon1" id="email"/>
       </div>
-      <button class="btn btn-primary" type="submit" id="saveAccountButton">Save</button>
+      <button class="btn btn-secondary" type="submit" id="saveAccountButton" th:text="#{homePage.save}">Save</button>
     </form>
   </div>
 </div>
 
 <!-- REVIEWS -->
-<div class="card border-primary mb-3 mt-3 ml-3 mr-3" id="reviewCard">
-  <div class="card-header text-white bg-primary">Reviews</div>
+<div class="card border-secondary mb-3 mt-3 ml-3 mr-3" id="reviewCard">
+  <div class="card-header text-white bg-secondary" th:text="#{homePage.acoountDetails}">Reviews</div>
   <div class="card-body">
     <form action="#" th:action="@{/}" th:object="${reviews}" method="get">
       <table class="table" id="reviews">
         <thead>
         <tr>
           <th scope="col" width="100"></th>
-          <th scope="col">Review text</th>
-          <th scope="col">Creator</th>
-          <th scope="col">Associated media</th>
-          <th scope="col">Rating</th>
+          <th scope="col" th:text="#{homePage.deleteReview}">Review text</th>
+          <th scope="col" th:text="#{homePage.creator}">Creator</th>
+          <th scope="col" th:text="#{homePage.associatedMedia}">Associated media</th>
+          <th scope="col" th:text="#{homePage.rating}">Rating</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="review : ${reviews}">
-          <th scope="col" width="100"><a th:href="@{delete/__${review.id}__}" class="btn btn-primary">Delete review</a></th>
-          <th scope="col" th:text="${review.text}">Review text</th>
+          <th scope="col" width="100"><a th:href="@{delete/__${review.id}__}" class="btn btn-secondary" th:text="#{homePage.deleteReview}">Delete review</a></th>
+          <th scope="col" th:text="${review.text}" >Review text</th>
           <th scope="col" th:text="${review.creator.name}">Creator</th>
           <th scope="col" th:text="${review.media.title}">Associated media</th>
           <th scope="col" th:text="${review.rating}">Rating</th>
@@ -79,4 +78,7 @@
   </div>
 </div>
 </body>
+<footer>
+  <div th:replace="footer"/>
+</footer>
 </html>

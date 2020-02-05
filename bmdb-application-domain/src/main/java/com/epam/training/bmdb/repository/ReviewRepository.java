@@ -9,6 +9,5 @@ import com.epam.training.bmdb.domain.User;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
-    @Query
     public Iterable<Review> findAllByCreator(User creator);
 }

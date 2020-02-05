@@ -1,6 +1,7 @@
 package com.epam.training.bmdb.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +20,8 @@ public class HomeController {
     private ReviewRepository reviewRepository;
 
     @GetMapping("/home")
-    public String showWagerListAndRequestPlayer(User user, Model model) {
-        user=userRepository.findById("gergo093@hotmail.com").get();
+    public String showWagerListAndRequestPlayer(User user, Model model, Authentication authentication) {
+        user=userRepository.findByEmail(authentication.getName());
         model.addAttribute("user", user);
         model.addAttribute("reviews", reviewRepository.findAllByCreator(user));
         return "home";
@@ -39,4 +40,13 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/welcome")
+    public String loginSuccess(){
+        return "redirect:/home";
+    }
+
+    @GetMapping("/adminPage")
+    public String getAdminPage(){
+        return "adminPage";
+    }
 }

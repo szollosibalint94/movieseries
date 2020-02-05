@@ -1,6 +1,7 @@
 package com.epam.training.bmdb.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,10 +33,11 @@ public class ReviewController {
         return "review";
     }
 
-    @PostMapping("/save")
-    public String saveReview(@ModelAttribute Review review){
+    @PostMapping("/saveReview")
+    public String saveReview(@ModelAttribute Review review, UserDetails userDetails){
+        System.out.println(userDetails.toString());
         Media media= mediaRepository.findById(mediaId).get();
-        review.setCreator(userRepository.findById("gergo093@hotmail.com").get());
+        review.setCreator(userRepository.findByEmail(userDetails.getUsername()));
         review.setMedia(media);
         media.addReview(review);
         reviewRepository.save(review);
